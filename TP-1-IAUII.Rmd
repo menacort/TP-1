@@ -1,0 +1,97 @@
+---
+title: "TP1--"
+author: "Magdalena Cortiñas"
+date: "1/10/2021"
+output: html_document
+---
+
+**TP1:** 
+
+*Trabajaré con un dataset de la Ciudad Autónoma de Buenos Aires (BAData), incocorporando los Centros de Salud de CABA e identificar la presencia en los barrios*
+
+
+**1- Voy a comenzar cargando las librerías con las que voy a trabajar**
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+**2-Voy a cargar el dataset a utilizar** 
+
+
+```{r}
+cesac <- read_csv("cesacs.csv")
+```
+
+
+Ahora conozcamos nuestro dataset:
+
+Para esto, empecemos por los nombres:
+
+```{r}
+names(cesac)
+```
+
+*Veamos como se estructura:*
+
+```{r}
+dim(cesac)
+```
+
+*El dataset dispone de 45 registros/filas y 23 columnas:*
+
+```{r}
+ncol(cesac)
+```
+
+```{r}
+nrow(cesac)
+```
+*Ahora, veamos el encabezado de datos:*
+
+```{r}
+head(cesac)
+```
+
+*Continuaré haciendo un resumen estadístico de los datos:*
+
+```{r}
+summary(cesac)
+```
+
+*Ahora veré la estructura del Dataset:*
+
+```{r}
+str(cesac)
+```
+
+*A continuación, haré un resumen estadístico de las Comunas del Dataset*
+
+```{r}
+summary(cesac$barrio)
+```
+
+```{r}
+str(cesac$barrio)
+```
+*Como se puede observar, el dataset se encuentra compuesto por CESAC distribuidos en los distintos barrios de CABA.*
+
+
+*Voy a filtrar aquellos ubicados en el barrio de Villa Lugano*
+
+```{r}
+filtro_C13 <-filter(cesac, barrio=="VILLA LUGANO")
+head(filtro_C13)
+```
+
+```{r}
+dim(filtro_C13)
+```
+*Como podemos observar, en Villa Lugano arroja 6 centros*
+
+*A continuación, voy a renombrar la columna del nombre del establecimiento":*
+
+```{r}
+Renombrar <- rename(filtro_C13, "Centro de Salud"=nombre)
+```
